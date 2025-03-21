@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan's Pizza</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f5f5f7;
+        }
+        
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: #b71c1c;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #b71c1c;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
+            margin-top: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 80px 0;
+            overflow: hidden;
+            position: relative;
+            background-color: white;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #b71c1c;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-icon img {
+            height: 40px;
+        }
+        
+        .two-column {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .column img {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .column img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Taste Section */
+        .taste-section .column:first-child {
+            text-align: center;
+        }
+        
+        .taste-icon {
+            color: #b71c1c;
+            font-size: 36px;
+            margin-bottom: 20px;
+            background-color: rgba(183, 28, 28, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+        
+        .tagline {
+            font-size: 24px;
+            font-weight: 700;
+            color: #b71c1c;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        /* Experience Section */
+        .experience-section {
+            background-color: #f9f9f9;
+        }
+        
+        .experience-section .two-column {
+            flex-direction: row-reverse;
+        }
+        
+        /* Fine Dining Section */
+        .fine-dining-section .icon-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .icon-title img {
+            height: 30px;
+            margin-right: 15px;
+        }
+        
+        .icon-title h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #b71c1c;
+            text-transform: uppercase;
+        }
+        
+        /* Bringing Pizza Section */
+        .pizza-party-section {
+            background-color: #f9f9f9;
+        }
+        
+        .pizza-party-section .two-column {
+            flex-direction: row-reverse;
+        }
+        
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 100px 0;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-size: 100px;
+            color: #b71c1c;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 0;
+            margin: 60px 0 0 0;
+            box-shadow: none;
+            background-color: transparent;
+            border: none;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1d1d1f;
+            color: #f5f5f7;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-info p {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #a1a1a6;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            color: #fff;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: #b71c1c;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #a1a1a6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .two-column {
+                flex-direction: column !important;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 60px 0;
+                margin: 20px 0;
+                border-radius: 10px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">ARTISAN'S PIZZA</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">ABOUT US</a></li>
+                <li><a href="#">PIES</a></li>
+                <li><a href="#">MENU</a></li>
+                <li><a href="#">ORDER</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Image -->
+    <div class="hero"></div>
+
+    <!-- Taste Section -->
+    <div class="section-container">
+        <section class="section taste-section">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <div class="section-icon">
+                        <div class="taste-icon">🍕</div>
+                    </div>
+                    <h2 class="tagline">Taste The Tradition In Every Slice</h2>
+                </div>
+                <div class="two-column">
+                    <div class="column fade-in">
+                        <img src="https://images.pexels.com/photos/2147491/pexels-photo-2147491.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Top view of baked pizza">
+                    </div>
+                    <div class="column fade-in">
+                        <p>Welcome to our Neighborhood pizzeria, home to the heart of Chicago Style Thin Crust. We take pride in serving delicious, hand-crafted pizzas with only the freshest ingredients. Our menu features classic and specialty pies, made to order just for you. From our cozy dining room to our family spot, we create a warm and inviting atmosphere that keeps customers coming back generation after generation.</p>
+                        <p>Whether you're grabbing a slice on lunch or settling in for a family dinner, we guarantee a truly satisfying pizza experience. Come by and indulge in the great tradition of Artisan's Pizza.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section experience-section">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <div class="section-icon">
+                        <div class="taste-icon">🔥</div>
+                    </div>
+                    <h2 class="tagline">Experience The Wood-Fired Difference</h2>
+                </div>
+                <div class="two-column">
+                    <div class="column fade-in">
+                        <img src="https://images.pexels.com/photos/2180874/pexels-photo-2180874.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Person making a pizza">
+                    </div>
+                    <div class="column fade-in">
+                        <p>At our pizzeria, we believe in the tradition of wood-burning pizza ovens and what a woodfire can do to our dough. Our blend has been perfected over decades. The wood-fire gives our pizza a distinctive smoky flavor. Our artisan process carefully handcrafts every stage from the dough to the finished ingredient.</p>
+                        <p>The result is a perfectly crispy, slightly charred crust that adds depth and flavor to every bite. From the first bite to the last, you'll taste the difference that making with heart makes in every slice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fine Dining Section -->
+        <section class="section fine-dining-section">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <div class="section-icon">
+                        <div class="taste-icon">🍽️</div>
+                    </div>
+                    <div class="icon-title">
+                        <h2 class="tagline">Fine Dining, Pizza Delight</h2>
+                    </div>
+                </div>
+                <div class="two-column">
+                    <div class="column fade-in">
+                        <img src="https://images.pexels.com/photos/2323183/pexels-photo-2323183.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Woman enjoying pizza">
+                    </div>
+                    <div class="column fade-in">
+                        <p>At our pizzeria, we offer more than just delicious pizza. We are proud to offer a fine culinary experience. Whether you're seeking a sophisticated evening out with friends, or a casual evening with the family, our pizzas make an ideal match for a moment creating joy.</p>
+                        <p>A careful mix of traditional roots and modern inventiveness. Creative, masterful flavors crafted with integrity for customers who expect nothing but the very best. Set aside an hour you're in a dining experience you won't soon forget. Savor the flavors, breathe in the aromas, and fall in love with a tradition born in Chicago.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bringing Pizza Section -->
+        <section class="section pizza-party-section">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <div class="section-icon">
+                        <div class="taste-icon">🎉</div>
+                    </div>
+                    <h2 class="tagline">Bringing The Pizza Party To You</h2>
+                </div>
+                <div class="two-column">
+                    <div class="column fade-in">
+                        <img src="https://images.pexels.com/photos/2471171/pexels-photo-2471171.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cooked food">
+                    </div>
+                    <div class="column fade-in">
+                        <p>Our pizzeria is proud to offer catering services for all of your special events. Let us bring the pizza to your location for a memorable experience that your guests will love.</p>
+                        <p>Whether it's a corporate party, family reunion, or wedding celebration, Our experienced catering team will work with you to create a custom food experience that perfectly complements your event.</p>
+                        <p>Choose from rotating classic pizzas, gourmet pizzas, and adorable desserts. Let guests talk during their pizza while it's made to order!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="section testimonial-section">
+            <div class="container">
+                <div class="testimonial fade-in">
+                    <p>"I was impressed by the quality and freshness of the ingredients used in their pizzas. The wood-fired oven gives a unique taste to their pies that you can't find elsewhere. The catering service for my recent event was top-notch, and all of my guests were raving about the pizzas. I highly recommend this pizzeria for any catering needs or a casual dinner with friends."</p>
+                    <div class="testimonial-author">Giuseppe Belvedere</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery">
+                    <div class="gallery-item fade-in">
+                        <img src="https://images.pexels.com/photos/13443811/pexels-photo-13443811.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Man carrying pizza box">
+                        <div class="gallery-item-label">Delivery</div>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="https://images.pexels.com/photos/15201953/pexels-photo-15201953.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Table setting at restaurant">
+                        <div class="gallery-item-label">Reservations</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Artisan's Pizza</h3>
+                <p>Monday to Friday</p>
+                <p>11:00am - 10:00pm</p>
+                <p>Saturday & Sunday</p>
+                <p>12:00pm - 11:00pm</p>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon">P</a>
+                <a href="#" class="social-icon">I</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Artisan's Pizza. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            }
+        });
+        
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Check elements on page load
+        window.addEventListener('load', checkFade);
+        
+        // Check elements on scroll
+        window.addEventListener('scroll', checkFade);
+    </script>
+</body>
+</html>
